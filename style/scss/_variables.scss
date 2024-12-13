@@ -1,19 +1,15 @@
-// Traffic light colors
 $red-color: #ff4c4c;
 $orange-color: #f5a623;
 $green-color: #4caf50;
 
-// General styles
 $light-opacity: 0.5;
 $light-active-opacity: 1;
 $light-size: 100px;
 $alert-width: 250px;
 
-// Traffic Light container
 $traffic-light-width: 150px;
 $traffic-light-height: 400px;
 $traffic-light-border-radius: 15px;
 $traffic-light-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.3);
 
-// Icon hover color
-$icon-hover-color: #ffffff; // White color for the icon on hover, change it if needed
+$icon-hover-color: #ffffff;

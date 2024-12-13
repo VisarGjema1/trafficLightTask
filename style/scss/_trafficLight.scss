@@ -36,41 +36,39 @@
     background-color: transparent;
     opacity: v.$light-opacity;
     transition: opacity 0.3s ease-in-out;
-    border: 4px solid transparent; // Initially set transparent
+    border: 4px solid #fff;
     border-radius: 50%;
     transition: all 0.3s ease-in-out;
 
-    // Default border color for the buttons
     &.red {
-      border-color: v.$red-color; // Red border for the red button
+      border-color: v.$red-color;
     }
 
     &.orange {
-      border-color: v.$orange-color; // Orange border for the orange button
+      border-color: v.$orange-color;
     }
 
     &.green {
-      border-color: v.$green-color; // Green border for the green button
+      border-color: v.$green-color;
     }
 
-    // Active state, change background color when clicked
     &.active {
       opacity: v.$light-active-opacity;
 
       .countdown-text {
-        display: block; // Make countdown visible only for active buttons
+        display: block;
       }
 
       &.red {
-        background-color: v.$red-color; // Red background when active
+        background-color: v.$red-color;
       }
 
       &.orange {
-        background-color: v.$orange-color; // Orange background when active
+        background-color: v.$orange-color;
       }
 
       &.green {
-        background-color: v.$green-color; // Green background when active
+        background-color: v.$green-color;
       }
     }
 
@@ -81,11 +79,10 @@
       font-weight: bold;
       z-index: 2;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-      display: none; // Hide countdown by default
+      display: none;
     }
   }
 
-  // Alert styles
   .traffic-light .alert {
     top: 10px;
     left: 50%;
@@ -96,7 +93,6 @@
     padding: 10px;
   }
 
-  // Add a vertical stick (pole) below the traffic light
   &::after {
     content: "";
     position: absolute;
