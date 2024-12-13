@@ -90,7 +90,14 @@ function resetTrafficLightColors() {
 }
 
 function startCountdown(color) {
-  let countdownTime = color === "red" ? 60 : color === "orange" ? 10 : 0;
+  let countdownTime = 0;
+  if (color === "red") {
+    countdownTime = 60; // Red light stays for 60 seconds
+  } else if (color === "orange") {
+    countdownTime = 10; // Orange light stays for 10 seconds
+  } else if (color === "green") {
+    countdownTime = 30; // Green light stays for 30 seconds
+  }
 
   if (countdownTime > 0) {
     countdownTimer = setInterval(() => {
@@ -100,9 +107,11 @@ function startCountdown(color) {
       if (countdownTime <= 0) {
         clearCurrentCountdown();
         if (color === "red") {
-          clickLight("orange");
+          clickLight("orange"); // Change to orange after red
         } else if (color === "orange") {
-          clickLight("green");
+          clickLight("green"); // Change to green after orange
+        } else if (color === "green") {
+          clickLight("red"); // Change back to red after green
         }
       }
     }, 1000);
