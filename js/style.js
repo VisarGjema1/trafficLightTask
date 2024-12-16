@@ -1,3 +1,6 @@
+/* 
+* In general the code looks well structured and traffic animation looks cool, there is a small feedback below, please check it.
+*/
 let currentAlert = null;
 let countdownTimer = null;
 
@@ -42,16 +45,24 @@ function showAlert(color) {
     currentAlert.remove();
   }
 
+  /*
+  * Ternary if is usually preffered when you have to make 2 case comparisson like if/else.
+  * It is not wrong to use this way like below, but it is harder to read. On situations like this,
+  * prefer to outline comparisons by separating them with () or add the comparisons in the new line, see the alignment
+  * of the alertMessage section. For instance:
+  *  color === "red" ? "danger" : (color === "orange" ? "warning" : "success");
+  * OR you can use the switch case, if you don't want to dive into cycles of if/else-if/else
+  */
   const alertType =
     color === "red" ? "danger" : color === "orange" ? "warning" : "success";
   const alertMessage =
     color === "red"
       ? "STOP"
       : color === "orange"
-      ? "GET READY"
-      : color === "green"
-      ? "GO"
-      : "";
+        ? "GET READY"
+        : color === "green"
+          ? "GO"
+          : "";
 
   const alertBox = document.createElement("div");
   alertBox.classList.add(
