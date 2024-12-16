@@ -1,6 +1,3 @@
-/* 
-* In general the code looks well structured and traffic animation looks cool, there is a small feedback below, please check it.
-*/
 let currentAlert = null;
 let countdownTimer = null;
 
@@ -28,7 +25,7 @@ function clickLight(color) {
     button.classList.remove("active");
     button.style.backgroundColor = "transparent";
     button.style.opacity = "0.5";
-    button.innerHTML = ""; // Clear countdown text
+    button.innerHTML = "";
   });
 
   const button = document.getElementById(`${color}-light`);
@@ -45,24 +42,24 @@ function showAlert(color) {
     currentAlert.remove();
   }
 
-  /*
-  * Ternary if is usually preffered when you have to make 2 case comparisson like if/else.
-  * It is not wrong to use this way like below, but it is harder to read. On situations like this,
-  * prefer to outline comparisons by separating them with () or add the comparisons in the new line, see the alignment
-  * of the alertMessage section. For instance:
-  *  color === "red" ? "danger" : (color === "orange" ? "warning" : "success");
-  * OR you can use the switch case, if you don't want to dive into cycles of if/else-if/else
-  */
-  const alertType =
-    color === "red" ? "danger" : color === "orange" ? "warning" : "success";
-  const alertMessage =
-    color === "red"
-      ? "STOP"
-      : color === "orange"
-        ? "GET READY"
-        : color === "green"
-          ? "GO"
-          : "";
+  let alertType, alertMessage;
+  switch (color) {
+    case "red":
+      alertType = "danger";
+      alertMessage = "STOP";
+      break;
+    case "orange":
+      alertType = "warning";
+      alertMessage = "GET READY";
+      break;
+    case "green":
+      alertType = "success";
+      alertMessage = "GO";
+      break;
+    default:
+      alertType = "";
+      alertMessage = "";
+  }
 
   const alertBox = document.createElement("div");
   alertBox.classList.add(
@@ -94,21 +91,20 @@ function resetTrafficLightColors() {
     button.style.backgroundColor = "transparent";
     button.style.opacity = "0.5";
     button.classList.remove("active");
-    button.innerHTML = ""; // Clear countdown text
+    button.innerHTML = "";
   });
 
   clearCurrentCountdown();
 }
 
 function startCountdown(color) {
-  let countdownTime = 0;
-  if (color === "red") {
-    countdownTime = 60; // Red light stays for 60 seconds
-  } else if (color === "orange") {
-    countdownTime = 10; // Orange light stays for 10 seconds
-  } else if (color === "green") {
-    countdownTime = 30; // Green light stays for 30 seconds
-  }
+  const countdownTimes = {
+    red: 60,
+    orange: 10,
+    green: 30,
+  };
+
+  let countdownTime = countdownTimes[color] || 0;
 
   if (countdownTime > 0) {
     countdownTimer = setInterval(() => {
@@ -117,13 +113,12 @@ function startCountdown(color) {
 
       if (countdownTime <= 0) {
         clearCurrentCountdown();
-        if (color === "red") {
-          clickLight("orange"); // Change to orange after red
-        } else if (color === "orange") {
-          clickLight("green"); // Change to green after orange
-        } else if (color === "green") {
-          clickLight("red"); // Change back to red after green
-        }
+        const nextLight = {
+          red: "orange",
+          orange: "green",
+          green: "red",
+        };
+        clickLight(nextLight[color]);
       }
     }, 1000);
   }
